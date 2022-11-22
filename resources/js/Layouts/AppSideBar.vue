@@ -23,19 +23,14 @@
           </a>
         </li>
       </ul>
-      <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
+      <ul v-for="account in accounts.account" class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
         <li>
-          <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+          <a href="#" class="flex items-center p-2 text-base  font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
             <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white dark:text-gray-400" focusable="false" data-prefix="fas" data-icon="gem" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M378.7 32H133.3L256 182.7L378.7 32zM512 192l-107.4-141.3L289.6 192H512zM107.4 50.67L0 192h222.4L107.4 50.67zM244.3 474.9C247.3 478.2 251.6 480 256 480s8.653-1.828 11.67-5.062L510.6 224H1.365L244.3 474.9z"></path></svg>
-            <span class="ml-4">Account 1</span>
+            <span class="ml-4 text-sm">{{account.account_name}} - {{account.working_balance.formatted}}</span>
           </a>
         </li>
-        <li>
-          <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
-            <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white dark:text-gray-400" focusable="false" data-prefix="fas" data-icon="gem" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M378.7 32H133.3L256 182.7L378.7 32zM512 192l-107.4-141.3L289.6 192H512zM107.4 50.67L0 192h222.4L107.4 50.67zM244.3 474.9C247.3 478.2 251.6 480 256 480s8.653-1.828 11.67-5.062L510.6 224H1.365L244.3 474.9z"></path></svg>
-            <span class="ml-4">Account 2</span>
-          </a>
-        </li>
+
       </ul>
     </div>
   </aside>
@@ -44,5 +39,11 @@
 
 
 <script lang="ts" setup>
+import {computed} from "vue";
+import {usePage} from "@inertiajs/inertia-vue3";
+
+
+const accounts = computed(() => usePage().props.value.accounts);
+
 
 </script>

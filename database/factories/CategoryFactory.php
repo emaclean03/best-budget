@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Cknow\Money\Money;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,14 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
+        $category_assigned = Money::USD($this->faker->randomNumber(3));
+        $category_activity = 0;
+        $category_available = Money::USD($category_assigned)->subtract( Money::USD($category_activity));
         return [
-            //
+            'category_name' => 'Mortgage',
+            'category_assigned' => $category_assigned,
+            'category_activity' => $category_activity,
+            'category_available' => $category_available,
         ];
     }
 }

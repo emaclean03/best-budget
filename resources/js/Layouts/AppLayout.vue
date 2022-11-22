@@ -7,6 +7,11 @@
         <!-- Primary Navigation Menu -->
         <div class="mx-auto px-4 sm:px-6 lg:px-8 ">
           <div class="flex justify-between h-16">
+            <div class="flex w-1/2 justify-end items-center mt-2">
+              <div class="1/4 bg-green-200 rounded-lg p-2 m-2">
+                {{working_balance.formatted}}
+              </div>
+            </div>
             <div class="flex">
               <!-- Navigation Links -->
               <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex ml-4 mt-3">
@@ -211,9 +216,9 @@
 
 
 <script lang="ts" setup>
-import {ref} from 'vue';
+import {computed, ref} from 'vue';
 import {Inertia} from '@inertiajs/inertia';
-import {Head, Link} from '@inertiajs/inertia-vue3';
+import {Head, Link, usePage} from '@inertiajs/inertia-vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -226,9 +231,17 @@ interface Props {
   title: string,
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const showingNavigationDropdown = ref(false);
+
+const accounts = computed(() => usePage().props.value.accounts);
+const working_balance = computed(() => usePage().props.value.working_balance);
+
+
+console.log(accounts.value);
+
+
 const logout = () => {
   Inertia.post(route('logout'));
 };

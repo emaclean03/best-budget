@@ -17,7 +17,7 @@ class BudgetFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'budget_name' => $this->faker->domainWord(),
         ];
     }
 }
