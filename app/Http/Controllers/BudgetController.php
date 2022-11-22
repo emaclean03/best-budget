@@ -18,7 +18,7 @@ class BudgetController extends Controller
     public function index()
     {
         return Inertia::render('Budget/Budget', [
-            'budget'=>Auth::user()->budget
+            'budget'=>Auth::user()->budget()->with('categories')->first()
         ]);
     }
 
@@ -47,11 +47,13 @@ class BudgetController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Budget  $budget
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function show(Budget $budget)
     {
-        //
+        return Inertia::render('Budget/Budget', [
+            'budget'=>$budget->with('categories')->first()
+        ]);
     }
 
     /**
