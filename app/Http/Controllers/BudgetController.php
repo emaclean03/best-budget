@@ -59,7 +59,7 @@ class BudgetController extends Controller
         $budget->save();*/
 
         return Inertia::render('Budget/Budget', [
-            'budget'=>$budget->with('categories')->first()
+            'budget'=>$budget->with(['categories', 'account'])->first()
         ]);
     }
 

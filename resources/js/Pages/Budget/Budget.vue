@@ -16,10 +16,16 @@ interface Props{
     budget_name: string,
     categories:[{
       category_name: string,
+    }],
+    account:[{
+      account_name: string,
+      cleared_balance: number,
+      uncleared_balance: number,
+      working_balance: number,
     }]
   }
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
 </script>

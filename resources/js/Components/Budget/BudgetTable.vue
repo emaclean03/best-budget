@@ -47,6 +47,7 @@
 
 <script lang="ts" setup>
 import {ref} from "vue";
+import {Inertia} from "@inertiajs/inertia";
 
 interface Props{
   categories:[{
@@ -116,6 +117,6 @@ const handleSaveCategoryName = (value: string, id: number) =>{
 
 
 const handleSaveCategoryAssigned = (value: string, id: number) =>{
-  console.log('saving...', value);
+  Inertia.post(`/category/${id}/updateAssigned`, {amount: value})
 }
 </script>

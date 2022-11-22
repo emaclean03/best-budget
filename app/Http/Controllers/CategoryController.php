@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use Cknow\Money\Money;
 
 class CategoryController extends Controller
 {
@@ -71,6 +72,29 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         //
+    }
+
+  /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateCategoryRequest  $request
+     * @param  \App\Models\Category  $category
+     * @return \Illuminate\Http\RedirectResponse
+   */
+    public function updateAssigned(UpdateCategoryRequest $request, Category $category)
+    {
+        //Updating assigned amount
+        /*
+         * Update the category_assigned amount
+         * subtract category_assigned from category_available
+         *
+         * */
+        $category->update([
+            'category_assigned' => $request->amount,
+            'category_available'=> Money::USD($request->amount)->subtract($category->category_activity),
+        ]);
+
+        return redirect()->back();
     }
 
     /**
