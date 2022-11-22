@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,4 +36,7 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/budget/{budget}', [BudgetController::class, 'show'])->name('budget.show');
+
+    /*Category*/
+    Route::post('/category/{category}/updateAssigned', [CategoryController::class, 'updateAssigned'])->name('category.updateAssigned');
 });

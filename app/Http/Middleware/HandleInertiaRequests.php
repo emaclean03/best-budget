@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use Cknow\Money\Money;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -36,8 +38,11 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+
         return array_merge(parent::share($request), [
-            //
+            'accounts' => fn () => $request->user() ? $request->user()->budget()->with('account')->first() : null,
+            'working_balance' => $request->user() ? Money::USD($request->user()->account()->sum('working_balance'))
+                ->subtract(Money::USD($request->user()->category()->sum('category_assigned'))) : null,
         ]);
     }
 }
