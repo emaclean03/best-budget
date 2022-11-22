@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Budget;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -35,6 +36,10 @@ class CreateNewUser implements CreatesNewUsers
 
         //Let's create a budget when a user is registered
         //And we can fill it in with default categories
+
+     //   $budget = new Budget;
+
+
 
     }
 }
