@@ -64,7 +64,7 @@ return [
 
     'home' => function(){
         $user = Auth::user();
-        return route('budget.index', ['budget'=>$user->budget->id]);
+        return route('budget.show', ['budget'=>$user->budget->id]);
     },
 
     /*

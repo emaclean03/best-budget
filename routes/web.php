@@ -34,5 +34,5 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/budget/{budget}', [BudgetController::class, 'index'])->name('budget.index');
+    Route::get('/budget/{budget}', [BudgetController::class, 'show'])->name('budget.show');
 });
