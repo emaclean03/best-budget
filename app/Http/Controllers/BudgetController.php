@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBudgetRequest;
 use App\Http\Requests\UpdateBudgetRequest;
 use App\Models\Budget;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Money\Currency;
+use Money\Money;
 
 class BudgetController extends Controller
 {
@@ -51,6 +54,10 @@ class BudgetController extends Controller
      */
     public function show(Budget $budget)
     {
+       /* $budget = Category::findOrFail(1);
+        $budget->category_assigned = Money::USD($budget->category_assigned->getAmount())->add(Money::USD(300));
+        $budget->save();*/
+
         return Inertia::render('Budget/Budget', [
             'budget'=>$budget->with('categories')->first()
         ]);

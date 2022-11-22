@@ -3,7 +3,9 @@
 namespace App\Actions\Fortify;
 
 use App\Models\Budget;
+use App\Models\Category;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -28,7 +30,7 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
-        return  User::create([
+        $user =  User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
@@ -36,10 +38,19 @@ class CreateNewUser implements CreatesNewUsers
 
         //Let's create a budget when a user is registered
         //And we can fill it in with default categories
+       $budget = Budget::make([
+           'budget_name'=> 'Your first budget'
+       ]);
 
-     //   $budget = new Budget;
+       $category = Category::make([
+           'user_id'=>$user->id,
+           'category_name' => 'Mortgage'
+       ]);
 
+        $user->budget()->save($budget);
+        $budget->categories()->save($category);
 
+        return $user;
 
     }
 }

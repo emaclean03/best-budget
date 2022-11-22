@@ -17,7 +17,10 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'category_name' => 'Mortgage',
+            'category_assigned' => $this->faker->randomNumber(3),
+            'category_activity' => $this->faker->randomNumber(3),
+            'category_available' => $this->faker->randomNumber(3),
         ];
     }
 }
