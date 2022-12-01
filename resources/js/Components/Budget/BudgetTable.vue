@@ -6,13 +6,14 @@
       row-key="name"
       :filter="filter"
       virtual-scroll
+      hide-bottom
       :rows-per-page-options="[20]"
   >
     <template v-slot:top-left>
-      This will be the nav bar
+    <Toolbar/>
     </template>
     <template v-slot:top-right>
-      <q-input dense debounce="150" v-model="filter" placeholder="Search name or email">
+      <q-input dense debounce="150" v-model="filter" placeholder="Search Category">
         <template v-slot:append>
           <q-icon name="search" />
         </template>
@@ -48,6 +49,7 @@
 <script lang="ts" setup>
 import {ref} from "vue";
 import {Inertia} from "@inertiajs/inertia";
+import Toolbar from "@/Layouts/Budget/Toolbar.vue";
 
 interface Props{
   categories:[{

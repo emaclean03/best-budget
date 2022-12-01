@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -39,4 +41,10 @@ Route::middleware([
 
     /*Category*/
     Route::post('/category/{category}/updateAssigned', [CategoryController::class, 'updateAssigned'])->name('category.updateAssigned');
+
+    /*Account*/
+    Route::get('/account/{account}/', [AccountController::class, 'show'])->name('account.show');
+
+    /*Transactions*/
+    Route::patch('/transaction/{transaction}/update', [TransactionController::class, 'update'])->name('transaction.update');
 });
