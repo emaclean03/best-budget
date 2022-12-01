@@ -54,12 +54,8 @@ class BudgetController extends Controller
      */
     public function show(Budget $budget)
     {
-       /* $budget = Category::findOrFail(1);
-        $budget->category_assigned = Money::USD($budget->category_assigned->getAmount())->add(Money::USD(300));
-        $budget->save();*/
-
         return Inertia::render('Budget/Budget', [
-            'budget'=>$budget->with(['categories', 'account'])->first()
+            'budget'=>$budget->with(['categories', 'account', 'transaction'])->first()
         ]);
     }
 
