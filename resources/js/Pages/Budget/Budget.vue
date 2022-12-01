@@ -22,6 +22,12 @@ interface Props{
       cleared_balance: number,
       uncleared_balance: number,
       working_balance: number,
+    }],
+    transaction:[{
+      payee:string,
+      memo: string,
+      outflow:number,
+      inflow:number,
     }]
   }
 }

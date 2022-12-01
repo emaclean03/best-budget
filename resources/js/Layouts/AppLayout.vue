@@ -8,7 +8,8 @@
         <div class="mx-auto px-4 sm:px-6 lg:px-8 ">
           <div class="flex justify-between h-16">
             <div class="flex w-1/2 justify-end items-center mt-2">
-              <div class="1/4 bg-green-200 rounded-lg p-2 m-2">
+              <div class="1/4 rounded-lg p-2 m-2" :class="working_balance.amount >= 0.00 ? 'bg-green-200' : 'bg-red-400'">
+                <!--working_balance is coming from HandleInertiaRequets.php                -->
                 {{working_balance.formatted}}
               </div>
             </div>

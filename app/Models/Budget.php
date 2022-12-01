@@ -30,4 +30,9 @@ class Budget extends Model
         return $this->hasMany(Account::class);
     }
 
+    public function transaction():HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
 }

@@ -84,14 +84,11 @@ class CategoryController extends Controller
     public function updateAssigned(UpdateCategoryRequest $request, Category $category)
     {
         //Updating assigned amount
-        /*
-         * Update the category_assigned amount
-         * subtract category_assigned from category_available
-         *
-         * */
         $category->update([
             'category_assigned' => $request->amount,
-            'category_available'=> Money::USD($request->amount)->subtract($category->category_activity),
+            'category_available'=> Money::USD($request->amount)
+                ->subtract(Money::USD($category->category_activity)
+                    ->absolute()),
         ]);
 
         return redirect()->back();

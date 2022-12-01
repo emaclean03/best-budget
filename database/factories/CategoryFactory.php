@@ -22,9 +22,9 @@ class CategoryFactory extends Factory
         $category_available = Money::USD($category_assigned)->subtract( Money::USD($category_activity));
         return [
             'category_name' => 'Mortgage',
-            'category_assigned' => $category_assigned,
-            'category_activity' => $category_activity,
-            'category_available' => $category_available,
+            'category_assigned' => 0,
+            'category_activity' => 0,
+            'category_available' => 0,
         ];
     }
 }

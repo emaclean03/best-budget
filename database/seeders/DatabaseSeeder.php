@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Account;
 use App\Models\Budget;
 use App\Models\Category;
+use App\Models\Transaction;
 use App\Models\User;
 use Cknow\Money\Money;
 use Illuminate\Database\Seeder;
@@ -63,6 +64,18 @@ class DatabaseSeeder extends Seeder
         );
 
         $budget->account()->save($account);
+
+        //Transactions
+        $transaction = Transaction::factory()->make(
+            [
+                'user_id'=>$user->first()->id,
+                'budget_id'=>$budget->first()->id,
+                'account_id'=>$account->first()->id,
+                'category_id'=>Category::first()->id,
+            ]
+        );
+
+        $account->transaction()->save($transaction);
 
     }
 }
