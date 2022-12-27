@@ -88,6 +88,7 @@ class TransactionController extends Controller
                 'payee' => $request->payee
             ]);
         } elseif ($request->filled('category')) {
+            //TODO:Need to update the activity amount going from old->new category
             $transaction->update([
                 'category_id' => $request->category
             ]);
