@@ -26,6 +26,7 @@
           <q-popup-edit @save="(val) => handleSaveCategoryName(val, props.row.id)" title="Update Category"
                         v-model="props.row.category_name" buttons v-slot="scope">
             <q-input v-model="scope.value" dense autofocus/>
+            <q-btn @click="handleDeleteCategory(props.row.id)" class="mt-2 ml-16">Delete</q-btn>
           </q-popup-edit>
         </q-td>
         <q-td key="category_assigned" :props="props">
@@ -116,6 +117,15 @@ const columns = [
 const handleSaveCategoryName = (value: string, id: number) =>{
   console.log('saving...');
 }
+
+const handleDeleteCategory = (id: number) =>{
+  Inertia.post(`/category/${id}/destroy`, {}, {
+    onSuccess: () => {
+
+    }
+  })
+}
+
 
 
 const handleSaveCategoryAssigned = (value: string, id: number) =>{

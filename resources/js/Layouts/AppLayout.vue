@@ -240,8 +240,6 @@ const accounts = computed(() => usePage().props.value.accounts);
 const working_balance = computed(() => usePage().props.value.working_balance);
 
 
-console.log(accounts.value);
-
 
 const logout = () => {
   Inertia.post(route('logout'));
