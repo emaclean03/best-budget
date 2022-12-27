@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Budget;
 use App\Models\Category;
 use Cknow\Money\Money;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -35,9 +37,18 @@ class CategoryController extends Controller
      * @param  \App\Http\Requests\StoreCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCategoryRequest $request, Budget $budget)
     {
-        //
+        $category = Category::make([
+            'category_name'=>$request->categoryName,
+            'currency'=>'USD',
+            'budget_id'=>$budget->id
+        ]);
+
+        Auth::user()->budget()->save($category);
+
+
+        return redirect()->back();
     }
 
     /**
@@ -102,6 +113,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()->back();
     }
 }

@@ -41,6 +41,8 @@ Route::middleware([
 
     /*Category*/
     Route::post('/category/{category}/updateAssigned', [CategoryController::class, 'updateAssigned'])->name('category.updateAssigned');
+    Route::post('/category/{budget}/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::post('/category/{category}/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
 
     /*Account*/
     Route::get('/account/{account}/', [AccountController::class, 'show'])->name('account.show');
