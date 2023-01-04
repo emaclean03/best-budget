@@ -49,4 +49,5 @@ Route::middleware([
 
     /*Transactions*/
     Route::patch('/transaction/{transaction}/update', [TransactionController::class, 'update'])->name('transaction.update');
+    Route::post('/transaction/store', [TransactionController::class, 'store'])->name('transaction.store');
 });

@@ -209,7 +209,8 @@
         </main>
       </div>
       <div class="w-1/6 h-screen">
-        <AppSideBar/>
+<!--This is the right side nav bar, for if we want to use it in the future-->
+<!--        <AppSideBar/>-->
       </div>
     </div>
   </div>

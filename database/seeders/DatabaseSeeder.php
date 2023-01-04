@@ -23,28 +23,28 @@ class DatabaseSeeder extends Seeder
         $user = User::factory(1)->create(['email' => 'emaclean03@aol.com']);
 
         $budget = Budget::factory()->create([
-            'user_id'=>$user->first()->id
+            'user_id' => $user->first()->id
         ]);
 
-            $categories = [
-                'Mortgage',
-                'Cell',
-                'School',
-                'Transportation',
-                'Car Insurance',
-                'Florida 529',
-                'Electric',
-                'Dog foods',
-                'Dining out',
-                'Fun Money',
-            ];
+        $categories = [
+            'Mortgage',
+            'Cell',
+            'School',
+            'Transportation',
+            'Car Insurance',
+            'Florida 529',
+            'Electric',
+            'Dog foods',
+            'Dining out',
+            'Fun Money',
+        ];
 
         //Create categories
-        foreach ($categories as $categoryName){
+        foreach ($categories as $categoryName) {
             $category = Category::factory()->make(
                 [
                     'user_id' => $user->first()->id,
-                    'budget_id'=>$budget->id,
+                    'budget_id' => $budget->id,
                     'category_name' => $categoryName
                 ]
             );
@@ -53,29 +53,37 @@ class DatabaseSeeder extends Seeder
         }
 
 
-
         //Make an account
         $account = Account::factory()->make(
             [
                 'user_id' => $user->first()->id,
-                'budget_id'=>$budget->id,
-                'working_balance'=> Money::USD(220000)
+                'budget_id' => $budget->id,
+                'working_balance' => Money::USD(220000)
             ]
         );
 
         $budget->account()->save($account);
 
         //Transactions
-        $transaction = Transaction::factory()->make(
+      Transaction::factory(1)->create(
             [
-                'user_id'=>$user->first()->id,
-                'budget_id'=>$budget->first()->id,
-                'account_id'=>$account->first()->id,
-                'category_id'=>Category::first()->id,
+                'user_id' => $user->first()->id,
+                'budget_id' => $budget->first()->id,
+                'account_id' => $account->first()->id,
+                'category_id' => Category::first()->id,
+                'outflow' => 0.00
             ]
         );
 
-        $account->transaction()->save($transaction);
+        Transaction::factory(1)->create(
+            [
+                'user_id' => $user->first()->id,
+                'budget_id' => $budget->first()->id,
+                'account_id' => $account->first()->id,
+                'category_id' => Category::first()->id,
+                'inflow' => 0.00
+            ]
+        );
 
     }
 }

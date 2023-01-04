@@ -6,7 +6,7 @@
       :filter="filter"
       virtual-scroll
       dense
-      :rows-per-page-options="[20]"
+      :rows-per-page-options="[17]"
   >
     <template v-slot:top-left>
      <toolbar/>
@@ -32,7 +32,6 @@
         </q-td>
         <q-td key="Category"  class="w-1/6" :props="props">
           <q-select
-
               option-label="category_name"
               option-value="id"
               filled
