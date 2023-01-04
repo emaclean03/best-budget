@@ -17,8 +17,8 @@ class TransactionFactory extends Factory
     public function definition()
     {
         return [
-            'payee' => $this->faker->name,
-            'memo' => $this->faker->randomLetter()
+            'payee' => 'Testing Payee',
+            'memo' => 'Testing Memo',
         ];
     }
 }
