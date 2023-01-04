@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Category;
 use App\Models\Transaction;
 use Cknow\Money\Money;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 
@@ -40,7 +41,28 @@ class TransactionController extends Controller
      */
     public function store(StoreTransactionRequest $request)
     {
-        //
+       if($request->transaction_type === 'outflow'){
+           Transaction::create([
+               'user_id' => Auth::user()->id,
+               'budget_id' => Auth::user()->budget->id,
+               'account_id' => 1, //TODO: Fix
+               'category_id' => $request->transaction_category['id'],
+               'payee' => $request->transaction_payee,
+               'memo' => $request->transaction_memo,
+               'outflow' =>  Money::USD($request->transaction_amount)->getAmount(),
+           ]);
+       }else {
+           Transaction::create([
+               'user_id' => Auth::user()->id,
+               'budget_id' => Auth::user()->budget->id,
+               'account_id' => 1, //TODO: Fix
+               'category_id' => $request->transaction_category['id'],
+               'payee' => $request->transaction_payee,
+               'memo' => $request->transaction_memo,
+               'inflow' => Money::USD($request->transaction_amount)->getAmount(),
+           ]);
+       }
+
     }
 
     /**
@@ -98,8 +120,6 @@ class TransactionController extends Controller
             $transaction->update([
                 'outflow' => $outflow_parse,
             ]);
-
-
 
             $transaction->refresh();
 

@@ -42,6 +42,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'budget' => fn() => $request->user() ? $request->user()->budget : null,
             'accounts' => fn () => $request->user() ? $request->user()->budget()->with('account')->first() : null,
+            'categories' => fn () => $request->user() ? $request->user()->budget()->with('categories')->get() : null,
             'working_balance' => $request->user() ? Money::USD($request->user()->account()->sum('working_balance'))
                 ->subtract(Money::USD($request->user()->category()->sum('category_assigned'))) : null,
         ]);
