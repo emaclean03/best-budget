@@ -9,7 +9,7 @@
       :rows-per-page-options="[17]"
   >
     <template v-slot:top-left>
-     <toolbar/>
+     <toolbar :account="account"/>
     </template>
     <template v-slot:top-right>
       <q-input dense debounce="150" v-model="filter" placeholder="Search name or email">
@@ -25,7 +25,7 @@
         </q-td>
         <q-td key="payee" :props="props">
           {{ props.row.payee }}
-          <q-popup-edit @save="(val) => handleSavePayee(val, props.row.id)" title="Update Assigned"
+          <q-popup-edit @save="(val) => handleSavePayee(val, props.row.id)" title="Update Payee"
                         v-model="props.row.payee" buttons v-slot="scope">
             <q-input v-model="scope.value" dense autofocus/>
           </q-popup-edit>
@@ -76,6 +76,10 @@ import {Inertia} from "@inertiajs/inertia";
 import Toolbar from "@/Layouts/Account/Toolbar.vue";
 
 interface Props {
+  account:{
+    id: number,
+    account_name:string,
+  }
   transactions: [{
     payee: string,
     memo: string,

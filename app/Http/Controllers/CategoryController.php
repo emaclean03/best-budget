@@ -94,6 +94,7 @@ class CategoryController extends Controller
    */
     public function updateAssigned(UpdateCategoryRequest $request, Category $category)
     {
+
         //Updating assigned amount
         $category->update([
             'category_assigned' => $request->amount,

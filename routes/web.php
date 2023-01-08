@@ -46,6 +46,7 @@ Route::middleware([
 
     /*Account*/
     Route::get('/account/{account}/', [AccountController::class, 'show'])->name('account.show');
+    Route::post('/account/store', [AccountController::class, 'store'])->name('account.store');
 
     /*Transactions*/
     Route::patch('/transaction/{transaction}/update', [TransactionController::class, 'update'])->name('transaction.update');

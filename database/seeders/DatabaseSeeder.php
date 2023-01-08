@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $categories = [
+            'Assign Income',
             'Mortgage',
             'Cell',
             'School',
@@ -58,7 +59,7 @@ class DatabaseSeeder extends Seeder
             [
                 'user_id' => $user->first()->id,
                 'budget_id' => $budget->id,
-                'working_balance' => Money::USD(220000)
+                'working_balance' => Money::USD(0)
             ]
         );
 

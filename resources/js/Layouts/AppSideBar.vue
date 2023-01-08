@@ -52,7 +52,12 @@
           </a>
         </li>
       </ul>
-      <ul v-for="account in accounts.account" class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
+      <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
+        <li>
+          <AddAccountButton/>
+        </li>
+      </ul>
+      <ul  v-for="account in accounts.account" class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
         <li>
           <a :href="`/account/${account.id}`"
              class="flex items-center p-2 text-base  font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
@@ -76,9 +81,12 @@
 <script lang="ts" setup>
 import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
+import AddAccountButton from "@/Components/AddAccountButton.vue";
 
 
 const accounts = computed(() => usePage().props.value.accounts);
 const budget = computed(() => usePage().props.value.budget);
+
+
 
 </script>

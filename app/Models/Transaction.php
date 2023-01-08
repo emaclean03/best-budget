@@ -4,14 +4,17 @@ namespace App\Models;
 
 use App\Traits\Multitenantable;
 use Cknow\Money\Casts\MoneyDecimalCast;
+use Cknow\Money\Money;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Transaction extends Model
 {
     use HasFactory, Multitenantable;
 
     protected $guarded = [];
+
 
     public function user()
     {

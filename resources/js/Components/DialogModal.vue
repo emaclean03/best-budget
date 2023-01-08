@@ -39,8 +39,7 @@ const close = () => {
                 <slot name="content" />
             </div>
         </div>
-
-        <div class="flex flex-row justify-end px-6 py-4 bg-gray-100 text-right">
+        <div class="flex flex-row justify-center px-6 py-4 bg-gray-100 text-right space-x-4">
             <slot name="footer" />
         </div>
     </Modal>
