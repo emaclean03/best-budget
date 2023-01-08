@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Multitenantable;
 use Cknow\Money\Casts\MoneyDecimalCast;
 use Cknow\Money\Casts\MoneyStringCast;
+use Cknow\Money\Money;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
@@ -14,6 +15,12 @@ class Category extends Model
     use HasFactory, Multitenantable;
 
     protected $guarded = [];
+
+    public static function boot()
+    {
+        parent::boot();
+
+    }
 
     public function user()
     {

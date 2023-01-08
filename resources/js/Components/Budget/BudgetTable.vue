@@ -20,7 +20,7 @@
       </q-input>
     </template>
     <template v-slot:body="props">
-      <q-tr :props="props">
+      <q-tr v-if="props.row.category_name !== 'Assign Income'" :props="props">
         <q-td key="category_name" :props="props">
           {{ props.row.category_name }}
           <q-popup-edit @save="(val) => handleSaveCategoryName(val, props.row.id)" title="Update Category"
@@ -33,7 +33,11 @@
           {{ props.row.category_assigned.formatted }}
           <q-popup-edit @save="(val) => handleSaveCategoryAssigned(val, props.row.id)" title="Update Assigned"
                         v-model="props.row.category_assigned.formatted" buttons v-slot="scope">
-            <q-input v-model="scope.value" dense autofocus/>
+            <q-input mask="#.##"
+                     fill-mask="0"
+                     dense autofocus
+                     input-class="text-right" reverse-fill-mask
+                     v-model="scope.value"/>
           </q-popup-edit>
         </q-td>
         <q-td key="category_activity" :props="props">

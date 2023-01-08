@@ -7,8 +7,8 @@
     <template #title>
       Add new transaction
       <div class="q-gutter-sm">
-        <q-radio v-model="transaction_type" val="inflow" label="Inflow" />
-        <q-radio v-model="transaction_type" val="outflow" label="Outflow" />
+        <q-radio v-model="transaction_type" val="inflow" label="Inflow"/>
+        <q-radio v-model="transaction_type" val="outflow" label="Outflow"/>
       </div>
     </template>
 
@@ -19,7 +19,7 @@
           option-label="category_name"
           option-value="id"
           v-model="transaction_category"
-          :options="categories" label="Category" />
+          :options="categories" label="Category"/>
       <q-input mask="#.##"
                fill-mask="0"
                input-class="text-right" reverse-fill-mask label="Transaction Amount ($)"
@@ -39,6 +39,15 @@ import {computed, ref} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 import {Inertia} from "@inertiajs/inertia";
 
+interface Props {
+  account: {
+    id: number,
+    account_name: string,
+  }
+}
+
+const props = defineProps<Props>();
+
 const categories = computed(() => usePage().props.value.categories);
 const showNewTransaction = ref(false);
 
@@ -49,14 +58,21 @@ const transaction_amount = ref(null);
 const transaction_type = ref('inflow');
 
 const handleAddTransaction = () => {
+  console.log(props.account);
   Inertia.post('/transaction/store', {
     transaction_type: transaction_type.value,
     transaction_payee: transaction_payee.value,
     transaction_category: transaction_category.value,
     transaction_memo: transaction_memo.value,
-    transaction_amount:transaction_amount.value
+    transaction_amount: transaction_amount.value,
+    account_id: props.account.id
   }, {
     onSuccess: () => {
+      transaction_type: transaction_type.value;
+      transaction_payee.value = null;
+      transaction_category.value = null;
+      transaction_memo.value = null;
+      transaction_amount.value = null;
       showNewTransaction.value = !showNewTransaction
     }
   })

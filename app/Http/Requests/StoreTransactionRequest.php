@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Account;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StoreTransactionRequest extends FormRequest
 {
@@ -11,9 +14,10 @@ class StoreTransactionRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(Request $request)
     {
-        return true;
+        $account = Account::findOrFail($request->account_id);
+        return $account->user_id === Auth::User()->id;
     }
 
     /**

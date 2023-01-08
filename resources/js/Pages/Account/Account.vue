@@ -1,6 +1,6 @@
 <template>
   <AppLayout>
-    <TransactionTable :transactions="transactions" :categories="categories"/>
+    <TransactionTable :transactions="transactions" :categories="categories" :account="account"/>
   </AppLayout>
 </template>
 
@@ -9,6 +9,10 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import TransactionTable from "@/Components/Account/TransactionTable.vue";
 
 interface Props{
+  account:{
+    id: number,
+    account_name: string,
+  }
   transactions:[{
     payee: string,
     memo:string,
