@@ -42,13 +42,39 @@ class CreateNewUser implements CreatesNewUsers
            'budget_name'=> 'Your first budget'
        ]);
 
-       $category = Category::make([
-           'user_id'=>$user->id,
-           'category_name' => 'Mortgage'
-       ]);
+
 
         $user->budget()->save($budget);
-        $budget->categories()->save($category);
+        //$budget->categories()->save($category);
+
+        $categories = [
+            'Assign Income',
+            'Mortgage',
+            'Cell',
+            'School',
+            'Transportation',
+            'Car Insurance',
+            'Florida 529',
+            'Electric',
+            'Dog foods',
+            'Dining out',
+            'Fun Money',
+        ];
+
+        //Create categories
+        foreach ($categories as $categoryName) {
+            $category = Category::factory()->make(
+                [
+                    'user_id' => $user->id,
+                    'budget_id' => $budget->id,
+                    'currency' => 'USD',
+                    'category_name' => $categoryName
+                ]
+            );
+
+            $budget->categories()->save($category);
+        }
+
 
         return $user;
 

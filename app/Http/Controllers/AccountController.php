@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Cknow\Money\Money;
 
 class AccountController extends Controller
 {
@@ -38,7 +39,15 @@ class AccountController extends Controller
      */
     public function store(StoreAccountRequest $request)
     {
-        //
+        $account = Account::make([
+            'budget_id'=>Auth::user()->budget->id,
+            'account_name'=>$request->accountName,
+            'account_type'=>$request->accountType,
+            'working_balance'=>Money::USD($request->startingBalance),
+            'currency' => 'USD',
+        ]);
+
+        Auth::user()->account()->save($account);
     }
 
     /**
@@ -50,6 +59,7 @@ class AccountController extends Controller
     public function show(Account $account)
     {
         return Inertia::render('Account/Account', [
+            'account' => $account,
             'transactions'=>$account->transaction()->with('category')->get(),
             'categories'=>Auth::user()->category()->get(),
         ]);

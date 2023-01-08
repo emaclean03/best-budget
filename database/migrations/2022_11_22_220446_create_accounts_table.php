@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('budget_id')->constrained()->onDelete('cascade');
             $table->string('account_name');
             $table->string('currency');
+            $table->string('account_type')->default('Checking');
             $table->decimal('cleared_balance', 15, 2)->default(0.00);
             $table->decimal('uncleared_balance', 15, 2)->default(0.00);
             $table->decimal('working_balance', 15, 2)->default(0.00);

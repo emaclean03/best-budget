@@ -11,6 +11,8 @@ class Account extends Model
 {
     use HasFactory, Multitenantable;
 
+    public $guarded = [];
+
     public function user(){
         return $this->belongsTo(User::class);
     }

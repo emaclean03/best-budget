@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
+use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
 use Cknow\Money\Money;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 
 
 class TransactionController extends Controller
@@ -37,32 +39,49 @@ class TransactionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \App\Http\Requests\StoreTransactionRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreTransactionRequest $request)
     {
        if($request->transaction_type === 'outflow'){
-           Transaction::create([
+           $transaction = Transaction::create([
                'user_id' => Auth::user()->id,
                'budget_id' => Auth::user()->budget->id,
-               'account_id' => 1, //TODO: Fix
+               'account_id' => $request->account_id,
                'category_id' => $request->transaction_category['id'],
                'payee' => $request->transaction_payee,
                'memo' => $request->transaction_memo,
                'outflow' =>  Money::USD($request->transaction_amount)->getAmount(),
            ]);
+
+           $transaction->refresh();
+
+           $transaction->category()->update([
+               'category_activity' => Money::USD($transaction->category->category_activity)
+                   ->add(Money::USD($request->transaction_amount))
+                   ->absolute()
+                   ->formatByDecimal(),
+           ]);
+
        }else {
+           //TODO: Add our incoming amount to be able to budget
+           $account = Account::findOrFail($request->account_id);
+           $account->update([
+               'working_balance'=> Money::USD($account->working_balance)->add(Money::USD($request->transaction_amount)),
+           ]);
+
+
            Transaction::create([
                'user_id' => Auth::user()->id,
                'budget_id' => Auth::user()->budget->id,
-               'account_id' => 1, //TODO: Fix
+               'account_id' => $request->account_id,
                'category_id' => $request->transaction_category['id'],
                'payee' => $request->transaction_payee,
                'memo' => $request->transaction_memo,
                'inflow' => Money::USD($request->transaction_amount)->getAmount(),
            ]);
-       }
-
+          }
+        return Redirect::back();
     }
 
     /**

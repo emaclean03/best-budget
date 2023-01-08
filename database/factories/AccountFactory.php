@@ -18,6 +18,7 @@ class AccountFactory extends Factory
     {
         return [
             'account_name' => 'PNC Checking account',
+            'currency' => 'USD',
 
         ];
     }
