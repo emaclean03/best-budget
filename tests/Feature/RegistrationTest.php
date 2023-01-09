@@ -48,20 +48,6 @@ class RegistrationTest extends TestCase
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
         ]);
 
-        $categories = [
-            'Assign Income',
-            'Mortgage',
-            'Cell',
-            'School',
-            'Transportation',
-            'Car Insurance',
-            'Florida 529',
-            'Electric',
-            'Dog foods',
-            'Dining out',
-            'Fun Money',
-        ];
-
         $this->assertDatabaseCount('categories',11);
 
         $this->assertAuthenticated();
