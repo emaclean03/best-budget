@@ -44,7 +44,9 @@
           {{ props.row.category_activity.formatted }}
         </q-td>
         <q-td key="category_available" :props="props">
+          <q-badge  :color="props.row.category_available.amount < 0.00 ? 'red' : 'green'" :text-color="'white'">
           {{ props.row.category_available.formatted }}
+          </q-badge>
         </q-td>
       </q-tr>
     </template>

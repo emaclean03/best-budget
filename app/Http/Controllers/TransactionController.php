@@ -44,6 +44,7 @@ class TransactionController extends Controller
     public function store(StoreTransactionRequest $request)
     {
        if($request->transaction_type === 'outflow'){
+
            $transaction = Transaction::create([
                'user_id' => Auth::user()->id,
                'budget_id' => Auth::user()->budget->id,
@@ -60,6 +61,13 @@ class TransactionController extends Controller
                'category_activity' => Money::USD($transaction->category->category_activity)
                    ->add(Money::USD($request->transaction_amount))
                    ->absolute()
+                   ->formatByDecimal(),
+           ]);
+           $transaction->refresh();
+           //Update available amount
+           $transaction->category()->update([
+               'category_available' => Money::USD($transaction->category->category_assigned)
+                   ->subtract(Money::USD($transaction->category->category_activity))
                    ->formatByDecimal(),
            ]);
 
