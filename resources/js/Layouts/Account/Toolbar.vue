@@ -59,7 +59,7 @@ const transaction_type = ref('inflow');
 
 const handleAddTransaction = () => {
   console.log(props.account);
-  Inertia.post('/transaction/store', {
+  router.post('/transaction/store', {
     transaction_type: transaction_type.value,
     transaction_payee: transaction_payee.value,
     transaction_category: transaction_category.value,

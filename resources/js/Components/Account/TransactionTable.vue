@@ -154,24 +154,24 @@ const columns = [
 ];
 
 const handleSavePayee = (value: string, id: number) =>{
-  Inertia.patch(`/transaction/${id}/update`, {payee: value})
+  router.patch(`/transaction/${id}/update`, {payee: value})
 }
 
 const handleUpdate = (value: { id: number }, transaction: {id:number,}) => {
-  Inertia.patch(`/transaction/${transaction}/update`, {category: value.id})
+  router.patch(`/transaction/${transaction}/update`, {category: value.id})
 }
 
 
 const handleSaveMemo = (value: string, id: number) =>{
-  Inertia.patch(`/transaction/${id}/update`, {memo: value})
+  router.patch(`/transaction/${id}/update`, {memo: value})
 }
 
 const handleSaveInflow = (value: number, id:number) => {
-  Inertia.patch(`/transaction/${id}/update`, {inflow: value})
+  router.patch(`/transaction/${id}/update`, {inflow: value})
 }
 const handleSaveOutflow = (value: number, id:number) => {
   console.log(value);
-  Inertia.patch(`/transaction/${id}/update`, {outflow: value})
+  router.patch(`/transaction/${id}/update`, {outflow: value})
 }
 
 

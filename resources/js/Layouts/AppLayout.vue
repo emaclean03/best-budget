@@ -243,6 +243,6 @@ const working_balance = computed(() => usePage().props.working_balance);
 
 
 const logout = () => {
-  Inertia.post(route('logout'));
+  router.post(route('logout'));
 };
 </script>

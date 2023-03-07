@@ -49,7 +49,7 @@ const account_name = ref(null);
 const account_starting_balance = ref(0);
 
 const handleAddAccount = () => {
-  Inertia.post('/account/store', {
+  router.post('/account/store', {
     accountName: account_name.value,
     accountType: account_type.value,
     startingBalance: account_starting_balance.value
