@@ -219,8 +219,8 @@
 
 <script lang="ts" setup>
 import {computed, ref} from 'vue';
-import {Inertia} from '@inertiajs/inertia';
-import {Head, Link, usePage} from '@inertiajs/inertia-vue3';
+import { router } from '@inertiajs/vue3'
+import {Head, Link, usePage} from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -237,8 +237,8 @@ const props = defineProps<Props>();
 
 const showingNavigationDropdown = ref(false);
 
-const accounts = computed(() => usePage().props.value.accounts);
-const working_balance = computed(() => usePage().props.value.working_balance);
+const accounts = computed(() => usePage().props.accounts);
+const working_balance = computed(() => usePage().props.working_balance);
 
 
 

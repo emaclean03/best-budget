@@ -13,7 +13,7 @@
         "laravel/jetstream": "^2.12",
         "laravel/sanctum": "^v3.2.1",
         "laravel/tinker": "^2.7",
-        "tightenco/ziggy": "^1.0"
+        "tightenco/ziggy": "^1.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

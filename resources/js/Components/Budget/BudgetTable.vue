@@ -55,7 +55,7 @@
 
 <script lang="ts" setup>
 import {ref} from "vue";
-import {Inertia} from "@inertiajs/inertia";
+import { router } from '@inertiajs/vue3'
 import Toolbar from "@/Layouts/Budget/Toolbar.vue";
 
 interface Props{

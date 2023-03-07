@@ -6,16 +6,16 @@
 
 <script lang="ts" setup>
 import {computed} from "vue";
-import {usePage} from "@inertiajs/inertia-vue3";
-import {Inertia} from "@inertiajs/inertia";
+import { usePage } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3'
 //Coming from HandleInertiaRequests.phpa
-const budget = computed(() => usePage().props.value.budget);
+const budget = computed(() => usePage().props.budget);
 
 const handleAddCategory = () => {
   let categoryPrompt = prompt('Category Name');
   if(!categoryPrompt) return false;
 
-  Inertia.post(`/category/${budget.value.id}/store`, {categoryName:categoryPrompt})
+  router.post(`/category/${budget.value.id}/store`, {categoryName:categoryPrompt})
 }
 
 </script>

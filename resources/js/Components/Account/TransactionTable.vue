@@ -72,7 +72,7 @@
 
 <script lang="ts" setup>
 import {ref, watch} from "vue";
-import {Inertia} from "@inertiajs/inertia";
+import { router } from '@inertiajs/vue3'
 import Toolbar from "@/Layouts/Account/Toolbar.vue";
 
 interface Props {
