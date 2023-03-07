@@ -36,8 +36,8 @@
 <script lang="ts" setup>
 import DialogModal from "@/Components/DialogModal.vue";
 import {computed, ref} from "vue";
-import {usePage} from "@inertiajs/inertia-vue3";
-import {Inertia} from "@inertiajs/inertia";
+import { usePage } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3'
 
 interface Props {
   account: {
@@ -48,7 +48,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const categories = computed(() => usePage().props.value.categories);
+const categories = computed(() => usePage().props.categories);
 const showNewTransaction = ref(false);
 
 const transaction_payee = ref(null);

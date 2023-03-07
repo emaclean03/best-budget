@@ -5,9 +5,6 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@inertiajs/inertia": "^0.11.0",
-        "@inertiajs/inertia-vue3": "^0.6.0",
-        "@inertiajs/progress": "^0.2.7",
         "@quasar/vite-plugin": "^1.2.3",
         "@tailwindcss/forms": "^0.5.2",
         "@tailwindcss/typography": "^0.5.2",
@@ -20,9 +17,10 @@
         "sass": "^1.32.12",
         "tailwindcss": "^3.1.0",
         "vite": "^3.0.0",
-        "vue": "^3.2.31"
+        "vue": "^3.2.47"
     },
     "dependencies": {
+        "@inertiajs/vue3": "^1.0.2",
         "@quasar/extras": "^1.15.6",
         "quasar": "^2.10.2"
     }

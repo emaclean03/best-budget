@@ -80,12 +80,12 @@
 
 <script lang="ts" setup>
 import {computed} from "vue";
-import {usePage} from "@inertiajs/inertia-vue3";
+import { usePage } from '@inertiajs/vue3'
 import AddAccountButton from "@/Components/AddAccountButton.vue";
 
 
-const accounts = computed(() => usePage().props.value.accounts);
-const budget = computed(() => usePage().props.value.budget);
+const accounts = computed(() => usePage().props.accounts);
+const budget = computed(() => usePage().props.budget);
 
 
 
