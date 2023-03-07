@@ -125,7 +125,7 @@ const handleSaveCategoryName = (value: string, id: number) =>{
 }
 
 const handleDeleteCategory = (id: number) =>{
-  Inertia.post(`/category/${id}/destroy`, {}, {
+  router.post(`/category/${id}/destroy`, {}, {
     onSuccess: () => {
 
     }
@@ -135,6 +135,6 @@ const handleDeleteCategory = (id: number) =>{
 
 
 const handleSaveCategoryAssigned = (value: string, id: number) =>{
-  Inertia.post(`/category/${id}/updateAssigned`, {amount: value})
+  router.post(`/category/${id}/updateAssigned`, {amount: value})
 }
 </script>
